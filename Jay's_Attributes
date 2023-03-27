@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-03-27T23:25:03.763Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36 OPR/96.0.0.0" etag="4-XtehwKWbRwGOgP1NH4" version="21.1.1" type="github">
+<mxfile host="app.diagrams.net" modified="2023-03-27T23:25:38.401Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36 OPR/96.0.0.0" etag="q2CaEbdn92spMWqxsU-L" version="21.1.1" type="github">
   <diagram name="Page-1" id="f9Z9JcKovDlWIhlh5cen">
     <mxGraphModel dx="2243" dy="766" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -147,6 +147,9 @@
         </mxCell>
         <mxCell id="SUTHILOBq0XpxsEapxnW-9" value="Big int" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="695" y="700" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="SUTHILOBq0XpxsEapxnW-12" value="String. Double wouldnt work as you need to add kg/ml etc" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="170" y="700" width="330" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
