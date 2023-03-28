@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-03-28T00:45:00.920Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="Q1YbxkXAbQfLIPC6noRr" version="21.1.1" type="github">
+<mxfile host="app.diagrams.net" modified="2023-03-28T01:31:29.429Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="UAIEGofvs-xqW9nxxtEF" version="21.1.1" type="github">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
     <mxGraphModel dx="2318" dy="802" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
@@ -63,7 +63,7 @@
         <mxCell id="Z7nOcVkvoPTGkj5-PJZt-16" value="ORDER" style="whiteSpace=wrap;html=1;align=center;fillColor=#C4C4C4;strokeColor=#36393d;" parent="1" vertex="1">
           <mxGeometry x="600" y="640" width="100" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="Z7nOcVkvoPTGkj5-PJZt-17" value="Places" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
+        <mxCell id="Z7nOcVkvoPTGkj5-PJZt-17" value="PLACES" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
           <mxGeometry x="390" y="480" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="Z7nOcVkvoPTGkj5-PJZt-18" value="Delivery address" style="ellipse;shape=doubleEllipse;margin=3;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
@@ -446,7 +446,7 @@
             <mxPoint x="550" y="850" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="nsHS_zGb_EANPwKiHyVl-77" value="has" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+        <mxCell id="nsHS_zGb_EANPwKiHyVl-77" value="INCLUDES" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
           <mxGeometry x="975" y="830" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="nsHS_zGb_EANPwKiHyVl-80" value="PAYMENT METHOD" style="whiteSpace=wrap;html=1;align=center;fillColor=#C4C4C4;strokeColor=#36393d;" vertex="1" parent="1">
