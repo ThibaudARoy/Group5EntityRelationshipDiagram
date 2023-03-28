@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-03-28T00:35:42.190Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="4ou3eCNtbuDQHKLWcSPg" version="21.1.1" type="github">
+<mxfile host="app.diagrams.net" modified="2023-03-28T00:45:00.920Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="Q1YbxkXAbQfLIPC6noRr" version="21.1.1" type="github">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
     <mxGraphModel dx="2318" dy="802" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
@@ -134,7 +134,7 @@
         <mxCell id="Z7nOcVkvoPTGkj5-PJZt-42" value="Delivery address (string)" style="shape=partialRectangle;top=0;left=0;right=0;bottom=0;html=1;align=left;verticalAlign=top;fillColor=none;spacingLeft=34;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;dropTarget=0;" parent="Z7nOcVkvoPTGkj5-PJZt-39" vertex="1">
           <mxGeometry y="56" width="180" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="Z7nOcVkvoPTGkj5-PJZt-43" value="FK" style="shape=partialRectangle;top=0;left=0;bottom=0;html=1;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;part=1;" parent="Z7nOcVkvoPTGkj5-PJZt-42" vertex="1" connectable="0">
+        <mxCell id="Z7nOcVkvoPTGkj5-PJZt-43" value="" style="shape=partialRectangle;top=0;left=0;bottom=0;html=1;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;part=1;" parent="Z7nOcVkvoPTGkj5-PJZt-42" vertex="1" connectable="0">
           <mxGeometry width="30" height="26" as="geometry" />
         </mxCell>
         <mxCell id="Z7nOcVkvoPTGkj5-PJZt-44" value="Phone number (string)" style="shape=partialRectangle;top=0;left=0;right=0;bottom=0;html=1;align=left;verticalAlign=top;fillColor=none;spacingLeft=34;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;dropTarget=0;" parent="Z7nOcVkvoPTGkj5-PJZt-39" vertex="1">
@@ -215,7 +215,7 @@
         <mxCell id="Z7nOcVkvoPTGkj5-PJZt-64" value="Delivery address (string)" style="shape=partialRectangle;top=0;left=0;right=0;bottom=0;html=1;align=left;verticalAlign=top;fillColor=none;spacingLeft=34;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;dropTarget=0;" parent="Z7nOcVkvoPTGkj5-PJZt-57" vertex="1">
           <mxGeometry y="108" width="180" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="Z7nOcVkvoPTGkj5-PJZt-65" value="" style="shape=partialRectangle;top=0;left=0;bottom=0;html=1;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;part=1;" parent="Z7nOcVkvoPTGkj5-PJZt-64" vertex="1" connectable="0">
+        <mxCell id="Z7nOcVkvoPTGkj5-PJZt-65" value="FK" style="shape=partialRectangle;top=0;left=0;bottom=0;html=1;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[];portConstraint=eastwest;part=1;" parent="Z7nOcVkvoPTGkj5-PJZt-64" vertex="1" connectable="0">
           <mxGeometry width="30" height="26" as="geometry" />
         </mxCell>
         <mxCell id="Z7nOcVkvoPTGkj5-PJZt-66" value="Product quantity (int)" style="shape=partialRectangle;top=0;left=0;right=0;bottom=0;html=1;align=left;verticalAlign=top;fillColor=none;spacingLeft=34;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;dropTarget=0;" parent="Z7nOcVkvoPTGkj5-PJZt-57" vertex="1">
