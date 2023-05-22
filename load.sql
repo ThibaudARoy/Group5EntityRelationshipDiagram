@@ -25,11 +25,16 @@ DROP TABLE Produce;
 DROP TABLE Meat;
 
 CREATE TABLE Customer(
-
+    phoneNumber varchar(12) NOT NULL,
+    PRIMARY KEY email varchar(100),
 );
 
 CREATE TABLE PaymentMethod(
-
+    billingAddress varchar(200) NOT NULL,
+    nameOnCard varchar(50) NOT NULL,
+    expirationDate DATE NOT NULL,
+    cvv varchar(3) NOT NULL,
+    PRIMARY KEY cardNumber varchar(16),
 );
 
 CREATE TABLE Store(
