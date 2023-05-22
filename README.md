@@ -22,4 +22,5 @@ Files:\
 &emsp;vincent-relationalSchema.drawio: Relational schema based on revised-erd.drawio\
 &emsp;relationalSchema.drawio: Improved and formatted relational schema\
 &emsp;normalised-schema.drawio: Normalised relational schema\
+&emsp;load.sql: SQL tables for normalised-schema.drawio\
 Report: https://docs.google.com/document/d/13jD2l3QeA-bWqVplHFSihco__LyrKvaYoFKIKY29xfU/edit#heading=h.u7m8mifggsxr
