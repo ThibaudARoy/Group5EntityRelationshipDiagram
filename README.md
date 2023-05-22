@@ -14,3 +14,12 @@ Files:\
 &emsp;early-erd.drawio: Combined ERD of all members' individual entities\
 &emsp;erd-assignment1.drawio: Retouched ERD submitted in the report\
 Report: https://docs.google.com/document/d/1Qkxx2H5dtRO0KSAOTxIir3XY2zPbgTMgVV8OQ_iDvw8/edit?usp=sharing\
+
+### Assignment 2
+Improve on the ERD from Assignment 1 based on the feedback. Created a relational schema and SQL tables for the schema.\
+Files:\
+&emsp;revised-erd.drawio: Improved ERD according to feedback\
+&emsp;vincent-relationalSchema.drawio: Relational schema based on revised-erd.drawio\
+&emsp;relationalSchema.drawio: Improved and formatted relational schema\
+&emsp;normalised-schema.drawio: Normalised relational schema\
+Report: https://docs.google.com/document/d/13jD2l3QeA-bWqVplHFSihco__LyrKvaYoFKIKY29xfU/edit#heading=h.u7m8mifggsxr
