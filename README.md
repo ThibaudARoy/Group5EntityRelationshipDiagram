@@ -5,7 +5,7 @@
 This repository is for us to store our files for the assignments. Most diagrams were created using DrawIO.
 
 ### Assignment 1
-Create a ERD based on a miniworld of a supermarket.
+Create a ERD based on a miniworld of a supermarket.\
 Files:  amy-erd.drawio          |   ERD of **CUSTOMER** and **ORDER** entities\
         jay-erd.drawio          |   ERD of **RECIPE** and **PRODUCT** entities\
         thibaud-erd.drawio      |   ERD of **PROMOTION** and **PAYMENT METHOD** entities\
