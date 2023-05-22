@@ -6,7 +6,7 @@ This repository is for us to store our files for the assignments. Most diagrams 
 
 ### Assignment 1
 Create a ERD based on a miniworld of a supermarket.\
-Files:
+Files:\
 &emsp;amy-erd.drawio&emsp;&emsp;|&emsp;ERD of **CUSTOMER** and **ORDER** entities\
 &emsp;jay-erd.drawio&emsp;&emsp;|&emsp;ERD of **RECIPE** and **PRODUCT** entities\
 &emsp;thibaud-erd.drawio&emsp;  |&emsp;ERD of **PROMOTION** and **PAYMENT METHOD** entities\
