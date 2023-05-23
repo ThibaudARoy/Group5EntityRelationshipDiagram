@@ -68,7 +68,7 @@ INSERT INTO Store VALUES('0992340571', '84731', '00005');
 COMMIT;
 
 CREATE TABLE Order(
-    orderDate DATE NOT NULL,
+    orderDate DATE,
     email varchar(100) NOT NULL,
     addressID varchar(5) NOT NULL,
     storeID varchar(5) NOT NULL,
@@ -85,7 +85,11 @@ CREATE TABLE Order(
         REFERENCES PaymentMethod(cardNumber)
 );
 
-INSERT INTO Store VALUES();
+INSERT INTO Order VALUES();
+INSERT INTO Order VALUES();
+INSERT INTO Order VALUES();
+INSERT INTO Order VALUES();
+INSERT INTO Order VALUES();
 COMMIT;
 
 CREATE TABLE Address(
