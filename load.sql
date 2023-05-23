@@ -24,6 +24,7 @@ DROP TABLE Dairy;
 DROP TABLE Produce;
 DROP TABLE Meat;
 
+/*Amy*/
 CREATE TABLE Customer(
     phoneNumber varchar(12) NOT NULL,
     PRIMARY KEY email varchar(100)
@@ -36,6 +37,7 @@ INSERT INTO Customer VALUES('02755566677', 'anotherone@yahoo.com');
 INSERT INTO Customer VALUES('020987987987', 'johnsmith@example.com');
 COMMIT;
 
+/*Amy*/
 CREATE TABLE PaymentMethod(
     billingAddress varchar(200) NOT NULL,
     nameOnCard varchar(50) NOT NULL,
@@ -51,6 +53,7 @@ INSERT INTO PaymentMethod VALUES('21A grange street, Dunedin', 'Leigh-Ann Charlo
 INSERT INTO PaymentMethod VALUES('3/15b Ethel Benjamin Pl, North Dunedin, Dunedin, Otago, NZ', 'Jenna Smith', '08/25', '189', '5678432128102012');
 COMMIT;
 
+/*Amy*/
 CREATE TABLE Store(
     phone varchar(12) NOT NULL,
     addressID varchar(5) NOT NULL,
@@ -67,6 +70,7 @@ INSERT INTO Store VALUES('0612939876', '48569', '00004');
 INSERT INTO Store VALUES('0992340571', '84731', '00005');
 COMMIT;
 
+/*Amy*/
 CREATE TABLE Order(
     orderDate DATE,
     email varchar(100) NOT NULL,
@@ -90,6 +94,7 @@ INSERT INTO Order VALUES(TO_DATE('1/1/22'), 'justanaddress@gmail.com', '35871', 
 INSERT INTO Order(email, addressID, storeID, cardNumber, orderNumber) VALUES('quickbrownfox@lazydog.com', '23896', '34862', '1178560639792583', '18547');
 COMMIT;
 
+/*Amy*/
 CREATE TABLE Address(
     address1 varchar(50) NOT NULL,
     address2 varchar(50),
@@ -103,12 +108,15 @@ INSERT INTO Address(address1, suburb, postcode, addressID) VALUES('290 North Rd'
 INSERT INTO Address VALUES('Unit 3', '123 Nelson St', 'Musselburg', '9010', '9186521');
 COMMIT;
 
+/*Amy*/
 CREATE TABLE Supplier(
     supplierName varchar(50) NOT NULL,
     PRIMARY KEY supplierID varchar(10)
 );
 
-INSERT INTO Supplier VALUES();
+INSERT INTO Supplier VALUES('General Store Dunedin', '18470');
+INSERT INTO Supplier VALUES('Harbour Fish', '26348576');
+INSERT INTO Supplier VALUES('Trents', '1076');
 COMMIT;
 
 CREATE TABLE Product(
