@@ -98,7 +98,9 @@ CREATE TABLE Address(
     PRIMARY KEY addressID varchar(10)
 );
 
-INSERT INTO Address VALUES();
+INSERT INTO Address VALUES('First Floor', '450 George Street', 'North Dunedin', '9016', '12489');
+INSERT INTO Address(address1, suburb, postcode, addressID) VALUES('290 North Rd', 'NEV', '9024', '493672');
+INSERT INTO Address VALUES('Unit 3', '123 Nelson St', 'Musselburg', '9010', '9186521');
 COMMIT;
 
 CREATE TABLE Supplier(
