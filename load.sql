@@ -39,12 +39,16 @@ COMMIT;
 CREATE TABLE PaymentMethod(
     billingAddress varchar(200) NOT NULL,
     nameOnCard varchar(50) NOT NULL,
-    expirationDate DATE NOT NULL,
+    expirationDate varchar(5) NOT NULL,
     cvv varchar(3) NOT NULL,
     PRIMARY KEY cardNumber varchar(16)
 );
 
-INSERT INTO PaymentMethod VALUES();
+INSERT INTO PaymentMethod VALUES('24 Heriot Row, City Rise', 'Harriet Doe', '04/27', '123', '1111222233334444');
+INSERT INTO PaymentMethod VALUES('11b ethel benjamin place, north dunedin', 'janet pollock', '12/24', '013', '1234987632104567');
+INSERT INTO PaymentMethod VALUES('21C CLARK ST CENTRAL DUNEDIN DUNEDIN OTAGO NEW ZEALAND', 'JW KIM', '10/23', '789', '4835610412345678');
+INSERT INTO PaymentMethod VALUES('21A grange street, Dunedin', 'Leigh-Ann Charlotte Lizbet Winston', '1/24', '222', '7612091800004321');
+INSERT INTO PaymentMethod VALUES('3/15b Ethel Benjamin Pl, North Dunedin, Dunedin, Otago, NZ', 'Jenna Smith', '08/25', '189', '5678432128102012');
 COMMIT;
 
 CREATE TABLE Store(
