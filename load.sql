@@ -29,7 +29,11 @@ CREATE TABLE Customer(
     PRIMARY KEY email varchar(100)
 );
 
-INSERT INTO Customer VALUES();
+INSERT INTO Customer VALUES('0213334445', 'loyalcustomer@gmail.com');
+INSERT INTO Customer VALUES('031112222', 'burneremail@hotmail.com');
+INSERT INTO Customer VALUES('091231234', 'tempaddy@outlook.com');
+INSERT INTO Customer VALUES('02755566677', 'anotherone@yahoo.com');
+INSERT INTO Customer VALUES('020987987987', 'johnsmith@example.com');
 COMMIT;
 
 CREATE TABLE PaymentMethod(
