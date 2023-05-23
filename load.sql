@@ -85,11 +85,9 @@ CREATE TABLE Order(
         REFERENCES PaymentMethod(cardNumber)
 );
 
-INSERT INTO Order VALUES();
-INSERT INTO Order VALUES();
-INSERT INTO Order VALUES();
-INSERT INTO Order VALUES();
-INSERT INTO Order VALUES();
+INSERT INTO Order VALUES(TO_DATE('21/05/2023'), 'someemail@random.com', '42145', '15098', '3109562012378683', '16951865');
+INSERT INTO Order VALUES(TO_DATE('1/1/22'), 'justanaddress@gmail.com', '35871', '53611', '9361517961327235', '1726543');
+INSERT INTO Order(email, addressID, storeID, cardNumber, orderNumber) VALUES('quickbrownfox@lazydog.com', '23896', '34862', '1178560639792583', '18547');
 COMMIT;
 
 CREATE TABLE Address(
