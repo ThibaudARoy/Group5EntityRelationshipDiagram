@@ -37,228 +37,276 @@ DROP TABLE IF EXISTS personal_hygiene;
 DROP TABLE IF EXISTS ad_postcode;
 DROP TABLE IF EXISTS product;
 
+
+
 CREATE TABLE customer(
-email VARCHAR(30) PRIMARY KEY,
-phoneNum VARCHAR(30) UNIQUE);
+  email VARCHAR(30) PRIMARY KEY,
+  phoneNum VARCHAR(30) UNIQUE
+  );
+
 
 CREATE TABLE payment_method(
-card_num CHAR(16) PRIMARY KEY,
-cvv INT,
-expDate VARCHAR(5),
-cardName VARCHAR(30),
-billAdd VARCHAR(120));
+  card_num CHAR(16) PRIMARY KEY,
+  cvv INT NOT NULL,
+  expDate VARCHAR(5) NOT NULL,
+  cardName VARCHAR(30) NOT NULL,
+  billAdd VARCHAR(120) NOT NULL
+  );
 
-CREATE TABLE address (
-  addressLine1 VARCHAR(30),
+
+CREATE TABLE address(
+  addressLine1 VARCHAR(30) NOT NULL,
   addressLine2 VARCHAR(30),
-  suburb VARCHAR(30),
+  suburb VARCHAR(30) NOT NULL,
   postcode INT NOT NULL,
   city VARCHAR(50) NOT NULL,
+
   addressID INT PRIMARY KEY 
   );
 
-CREATE TABLE supplier (
-  supName VARCHAR(30),
+
+CREATE TABLE supplier(
+  supName VARCHAR(30) UNIQUE NOT NULL,
+
   supplierID int PRIMARY KEY
-);
+  );
+
 
 CREATE TABLE store(
-storeID INT PRIMARY KEY,
-addressID INT,
-phone VARCHAR(30) UNIQUE,
+  storeID INT PRIMARY KEY,
+  addressID INT NOT NULL,
+  phone VARCHAR(30) UNIQUE NOT NULL,
 
-FOREIGN KEY (addressID) REFERENCES address(addressID));
+  FOREIGN KEY (addressID)
+  REFERENCES address(addressID)
+  );
+
 
 CREATE TABLE orders(
-orderNum INT PRIMARY KEY,
-cardNum CHAR(16),
-storeID INT,
-addressID INT,
-email VARCHAR(30),
-orderDate DATETIME,
-FOREIGN KEY (cardNum) REFERENCES payment_method(card_num),
-FOREIGN KEY (storeID) REFERENCES store(storeID),
-FOREIGN KEY (addressID) REFERENCES address(addressID),
-FOREIGN KEY (email) REFERENCES customer(email));
+  orderNum INT PRIMARY KEY,
+  cardNum CHAR(16) NOT NULL,
+  storeID INT NOT NULL,
+  addressID INT NOT NULL,
+  email VARCHAR(30) NOT NULL,
+  orderDate DATETIME,
+
+  FOREIGN KEY (cardNum)
+  REFERENCES payment_method(card_num),
+
+  FOREIGN KEY (storeID)
+  REFERENCES store(storeID),
+  
+  FOREIGN KEY (addressID)
+  REFERENCES address(addressID),
+  
+  FOREIGN KEY (email)
+  REFERENCES customer(email)
+  );
 
 
-CREATE TABLE product (
-
+CREATE TABLE product(
   barcode INT PRIMARY KEY,
-
-  amountInStock INT,
-
-  name VARCHAR(100),
-
+  amountInStock INT NOT NULL,
+  name VARCHAR(100) NOT NULL,
   useByDate DATE,
-
-  costPerUnit DECIMAL(10,2)
-
-);
+  costPerUnit DECIMAL(10,2) NOT NULL
+  );
 
 
-CREATE TABLE recipe (
-
- recipeName VARCHAR(80) PRIMARY KEY,
-
- instruction VARCHAR(1000)
-
-);
+CREATE TABLE recipe(
+  recipeName VARCHAR(80) PRIMARY KEY,
+  instruction VARCHAR(1000) NOT NULL
+  );
 
 
-CREATE TABLE ingredients (
-
+CREATE TABLE ingredients(
   prodName VARCHAR(100),
-
   recipeName VARCHAR(100),
-
-  productQuantity DECIMAL(10,2),
-
+  productQuantity DECIMAL(10,2) NOT NULL,
+  
   PRIMARY KEY (prodName, recipeName),
 
-  FOREIGN KEY (recipeName) REFERENCES recipe(recipeName)
+  FOREIGN KEY (recipeName)
+  REFERENCES recipe(recipeName)
+  );
 
-);
 
-
-CREATE TABLE promotion (
-
+CREATE TABLE promotion(
   promotionCode VARCHAR(50),
-
-  discountPercentage DECIMAL(5,2),
-
+  discountPercentage DECIMAL(5,2) NOT NULL,
   promotionDescription VARCHAR(200),
-
-  promotionStartDate DATE,
-
-  promotionLength INT,
-
-  productBarcode INT,
+  promotionStartDate DATE NOT NULL,
+  promotionLength INT NOT NULL,
+  productBarcode INT NOT NULL,
 
   PRIMARY KEY (promotionCode),
 
-  FOREIGN KEY (productBarcode) REFERENCES product(barcode)
-
-);
-
-
-CREATE TABLE requires (
-
-recipeName VARCHAR(50),
-
-productCode INT,
-
-PRIMARY KEY (recipeName, productCode),
-
-FOREIGN KEY (productCode) REFERENCES product(barcode),
-
-FOREIGN KEY (recipeName) REFERENCES recipe(recipeName)
-
-);
+  FOREIGN KEY (productBarcode)
+  REFERENCES product(barcode)
+  );
 
 
-CREATE TABLE contains_code (
+CREATE TABLE requires(
+  recipeName VARCHAR(50),
+  productCode INT,
+  
+  PRIMARY KEY (recipeName, productCode),
+  
+  FOREIGN KEY (productCode)
+  REFERENCES product(barcode),
+  
+  FOREIGN KEY (recipeName)
+  REFERENCES recipe(recipeName)
+  );
 
+
+CREATE TABLE contains_code(
   orderNum INT,
-
   barcode INT,
-
+  
   PRIMARY KEY (orderNum, barcode),
+  
+  FOREIGN KEY (barcode)
+  REFERENCES product(barcode),
 
-  FOREIGN KEY (barcode) REFERENCES product(barcode),
-
-  FOREIGN KEY (orderNum) REFERENCES orders(orderNum)
-
-);
-
+  FOREIGN KEY (orderNum)
+  REFERENCES orders(orderNum)
+  );
 
 
 CREATE TABLE supplies(
-supID INT,
-storeID INT ,
-prodCode INT,
- PRIMARY KEY (supID, storeID, prodCode),
-CONSTRAINT fk_supid FOREIGN KEY (supID) REFERENCES supplier(supplierID),
-CONSTRAINT fk_storID FOREIGN KEY (storeID) REFERENCES store(storeID),
-CONSTRAINT fk_prodCode FOREIGN KEY (prodCode) REFERENCES product(barcode));
+  supID INT,
+  storeID INT ,
+  prodCode INT,
+  
+  PRIMARY KEY (supID, storeID, prodCode),
+  
+  CONSTRAINT fk_supid FOREIGN KEY (supID)
+  REFERENCES supplier(supplierID),
+  
+  CONSTRAINT fk_storID FOREIGN KEY (storeID)
+  REFERENCES store(storeID),
+  
+  CONSTRAINT fk_prodCode FOREIGN KEY (prodCode)
+  REFERENCES product(barcode)
+  );
 
 
 CREATE TABLE receives_order(
-addressID INT,
-email VARCHAR(30),
-PRIMARY KEY(addressID, email),
-CONSTRAINT fk_addID FOREIGN KEY (addressID) REFERENCES store(addressID),
-CONSTRAINT fk_email FOREIGN KEY (email) REFERENCES customer(email));
+  addressID INT,
+  email VARCHAR(30),
+  
+  PRIMARY KEY(addressID, email),
+  
+  CONSTRAINT fk_addID FOREIGN KEY (addressID)
+  REFERENCES store(addressID),
+  
+  CONSTRAINT fk_email FOREIGN KEY (email)
+  REFERENCES customer(email)
+  );
 
 
 CREATE TABLE pays_with(
-card_num CHAR(16),
-email VARCHAR (30),
-PRIMARY KEY(card_num, email),
-CONSTRAINT fk_cardnum FOREIGN KEY (card_num) REFERENCES payment_method(card_num),
-CONSTRAINT fk_email_customer FOREIGN KEY (email) REFERENCES customer(email));
+  card_num CHAR(16),
+  email VARCHAR (30),
+  
+  PRIMARY KEY(card_num, email),
+  
+  CONSTRAINT fk_cardnum FOREIGN KEY (card_num)
+  REFERENCES payment_method(card_num),
+  
+  CONSTRAINT fk_email_customer FOREIGN KEY (email)
+  REFERENCES customer(email)
+  );
 
 
 CREATE TABLE phone_number(
-phone_num VARCHAR(12) PRIMARY KEY,
-fname VARCHAR(30),
-lname VARCHAR(30),
-CONSTRAINT fk_phone FOREIGN KEY (phone_num) REFERENCES customer (phoneNum));
+  phone_num VARCHAR(12) PRIMARY KEY,
+  fname VARCHAR(30),
+  lname VARCHAR(30),
+  
+  CONSTRAINT fk_phone FOREIGN KEY (phone_num)
+  REFERENCES customer(phoneNum)
+  );
 
 
 CREATE TABLE meat(
-prodCode INT PRIMARY KEY,
-animal VARCHAR(30),
-CONSTRAINT fk_prodcodeMeat FOREIGN KEY (prodCode) REFERENCES product (barcode));
+  prodCode INT PRIMARY KEY,
+  animal VARCHAR(30),
+  
+  CONSTRAINT fk_prodcodeMeat FOREIGN KEY (prodCode)
+  REFERENCES product(barcode)
+  );
 
 
 CREATE TABLE produce(
-prodCode INT PRIMARY KEY,
-name VARCHAR(30),
-organic BOOLEAN,
-CONSTRAINT fk_producecode FOREIGN KEY (prodCode) REFERENCES product (barcode));
+  prodCode INT PRIMARY KEY,
+  name VARCHAR(30),
+  organic BOOLEAN,
+  
+  CONSTRAINT fk_producecode FOREIGN KEY (prodCode)
+  REFERENCES product(barcode)
+  );
+
 
 CREATE TABLE supplier_contact(
 	contactType VARCHAR (30),
 	contactValue VARCHAR(50) NOT NULL UNIQUE,
 	iD INT,
-    PRIMARY KEY(contactType, iD),
-FOREIGN KEY (iD) REFERENCES product (barcode)
-);
+  
+  PRIMARY KEY(contactType, iD),
+  
+  FOREIGN KEY (iD)
+  REFERENCES product(barcode)
+  );
 
-CREATE TABLE dairy (
+
+CREATE TABLE dairy(
 	prodCode INT PRIMARY KEY,
 	dairyType VARCHAR (30),
-	FOREIGN KEY (ProdCode) REFERENCES product (barcode)
-);
 
-CREATE TABLE medicinal (
+	FOREIGN KEY (ProdCode)
+  REFERENCES product(barcode)
+  );
+
+
+CREATE TABLE medicinal(
 	prodCode INT PRIMARY KEY,
 	dosage INT,
-	FOREIGN KEY (prodCode) REFERENCES product (barcode)
-);
+	
+  FOREIGN KEY (prodCode)
+  REFERENCES product(barcode)
+  );
 
-CREATE TABLE confectionery (
+
+CREATE TABLE confectionery(
 	prodCode INT PRIMARY KEY,
 	conType VARCHAR (30),
-	FOREIGN KEY (prodCode) REFERENCES product (barcode)
+	
+  FOREIGN KEY (prodCode)
+  REFERENCES product(barcode)
+  );
 
-);
 
-CREATE TABLE personal_hygiene (
+CREATE TABLE personal_hygiene(
 	prodCode INT PRIMARY KEY,
 	scent VARCHAR (30),
-	FOREIGN KEY (prodCode) REFERENCES product (barcode)
+	
+  FOREIGN KEY (prodCode)
+  REFERENCES product(barcode)
+  );
 
-);
 
-CREATE TABLE store_phone (
+CREATE TABLE store_phone(
 	phone VARCHAR(50) PRIMARY KEY,
 	storeName VARCHAR(50) NOT NULL,
 	storeHours VARCHAR (50),
-	FOREIGN KEY (phone) REFERENCES store (phone)
 
-);
+	FOREIGN KEY (phone)
+  REFERENCES store(phone)
+  );
+
+
 
 INSERT INTO customer (email, phoneNum) VALUES
 ('thibaud.roy@gmail.com', '1234567890'),
@@ -270,6 +318,7 @@ INSERT INTO customer (email, phoneNum) VALUES
 INSERT INTO payment_method (card_num, cvv, expDate, cardName, billAdd) VALUES
 ('1234567890123456', 123, '12/25', 'Thibaud Roy', '123 Main St'),
 ('9876543210987654', 456, '03/24', 'Vincent Lee', '456 Elm St');
+
 
 INSERT INTO address (addressLine1, addressLine2, suburb, postcode, city, addressID) VALUES
 ('123 First St', 'Apt 1A', 'North Dunedin', 11111, 'Dunedin', 1),
@@ -284,7 +333,6 @@ INSERT INTO supplier (supName, supplierID) VALUES
 INSERT INTO store (storeID, addressID, phone) VALUES
 (1, 1, '111-111-1111'),
 (2, 2, '222-222-2222');
-
 
 
 INSERT INTO orders (orderNum, cardNum, storeID, addressID, email, orderDate) VALUES
@@ -381,8 +429,10 @@ INSERT INTO personal_hygiene (prodCode, scent) VALUES
 INSERT INTO store_phone (phone, storeName, storeHours) VALUES
 ('111-111-1111', 'PakN\'Save', '9:00 AM - 5:00 PM'),
 ('222-222-2222', 'Countdown', '10:00 AM - 6:00 PM');
-
 COMMIT;
+
+
+
 SELECT * FROM customer;
 SELECT * FROM payment_method;
 SELECT * FROM address;
