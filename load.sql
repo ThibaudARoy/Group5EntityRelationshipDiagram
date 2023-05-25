@@ -1,196 +1,410 @@
-DROP TABLE Customer;
-DROP TABLE PaymentMethod;
-DROP TABLE Store;
-DROP TABLE Order;
-DROP TABLE Address;
-DROP TABLE Supplier;
-DROP TABLE Product;
-DROP TABLE Recipe;
-DROP TABLE Promotion;
-DROP TABLE SupplierContact;
-DROP TABLE Ingredients;
-DROP TABLE PhoneNumber;
-DROP TABLE PaysWith;
-DROP TABLE ReceivesOrder;
-DROP TABLE Supplies;
-DROP TABLE Contains;
-DROP TABLE Requires;
-DROP TABLE AdPostcode;
-DROP TABLE StorePhone;
-DROP TABLE PersonalHygiene;
-DROP TABLE Confectionery;
-DROP TABLE Medicinal;
-DROP TABLE Dairy;
-DROP TABLE Produce;
-DROP TABLE Meat;
 
-/*Amy*/
-CREATE TABLE Customer(
-    phoneNumber varchar(12) NOT NULL,
-    PRIMARY KEY email varchar(100)
+
+
+
+DROP TABLE IF EXISTS contains_code;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS receives_order;
+DROP TABLE IF EXISTS pays_with;
+DROP TABLE IF EXISTS payment_method;
+DROP TABLE IF EXISTS phone_number;
+DROP TABLE IF EXISTS customer;
+
+
+
+
+DROP TABLE IF EXISTS ingredients;
+DROP TABLE IF EXISTS promotion;
+DROP TABLE IF EXISTS requires;
+DROP TABLE IF EXISTS recipe;
+
+DROP TABLE IF EXISTS supplies;
+DROP TABLE IF EXISTS store_phone;
+DROP TABLE IF EXISTS store;
+DROP TABLE IF EXISTS address;
+DROP TABLE IF EXISTS supplier;
+
+
+
+DROP TABLE IF EXISTS meat;
+DROP TABLE IF EXISTS produce;
+DROP TABLE IF EXISTS supplier_contact;
+DROP TABLE IF EXISTS dairy;
+DROP TABLE IF EXISTS medicinal;
+DROP TABLE IF EXISTS confectionery;
+DROP TABLE IF EXISTS personal_hygiene;
+
+DROP TABLE IF EXISTS ad_postcode;
+DROP TABLE IF EXISTS product;
+
+CREATE TABLE customer(
+email VARCHAR(30) PRIMARY KEY,
+phoneNum VARCHAR(30) UNIQUE);
+
+CREATE TABLE payment_method(
+card_num CHAR(16) PRIMARY KEY,
+cvv INT,
+expDate VARCHAR(5),
+cardName VARCHAR(30),
+billAdd VARCHAR(120));
+
+CREATE TABLE address (
+  addressLine1 VARCHAR(30),
+  addressLine2 VARCHAR(30),
+  suburb VARCHAR(30),
+  postcode INT NOT NULL,
+  city VARCHAR(50) NOT NULL,
+  addressID INT PRIMARY KEY 
+  );
+
+CREATE TABLE supplier (
+  supName VARCHAR(30),
+  supplierID int PRIMARY KEY
 );
 
-INSERT INTO Customer VALUES('0213334445', 'loyalcustomer@gmail.com');
-INSERT INTO Customer VALUES('031112222', 'burneremail@hotmail.com');
-INSERT INTO Customer VALUES('091231234', 'tempaddy@outlook.com');
-INSERT INTO Customer VALUES('02755566677', 'anotherone@yahoo.com');
-INSERT INTO Customer VALUES('020987987987', 'johnsmith@example.com');
+CREATE TABLE store(
+storeID INT PRIMARY KEY,
+addressID INT,
+phone VARCHAR(30) UNIQUE,
+
+FOREIGN KEY (addressID) REFERENCES address(addressID));
+
+CREATE TABLE orders(
+orderNum INT PRIMARY KEY,
+cardNum CHAR(16),
+storeID INT,
+addressID INT,
+email VARCHAR(30),
+orderDate DATETIME,
+FOREIGN KEY (cardNum) REFERENCES payment_method(card_num),
+FOREIGN KEY (storeID) REFERENCES store(storeID),
+FOREIGN KEY (addressID) REFERENCES address(addressID),
+FOREIGN KEY (email) REFERENCES customer(email));
+
+
+CREATE TABLE product (
+
+  barcode INT PRIMARY KEY,
+
+  amountInStock INT,
+
+  name VARCHAR(100),
+
+  useByDate DATE,
+
+  costPerUnit DECIMAL(10,2)
+
+);
+
+
+CREATE TABLE recipe (
+
+ recipeName VARCHAR(80) PRIMARY KEY,
+
+ instruction VARCHAR(1000)
+
+);
+
+
+CREATE TABLE ingredients (
+
+  prodName VARCHAR(100),
+
+  recipeName VARCHAR(100),
+
+  productQuantity DECIMAL(10,2),
+
+  PRIMARY KEY (prodName, recipeName),
+
+  FOREIGN KEY (recipeName) REFERENCES recipe(recipeName)
+
+);
+
+
+CREATE TABLE promotion (
+
+  promotionCode VARCHAR(50),
+
+  discountPercentage DECIMAL(5,2),
+
+  promotionDescription VARCHAR(200),
+
+  promotionStartDate DATE,
+
+  promotionLength INT,
+
+  productBarcode INT,
+
+  PRIMARY KEY (promotionCode),
+
+  FOREIGN KEY (productBarcode) REFERENCES product(barcode)
+
+);
+
+
+CREATE TABLE requires (
+
+recipeName VARCHAR(50),
+
+productCode INT,
+
+PRIMARY KEY (recipeName, productCode),
+
+FOREIGN KEY (productCode) REFERENCES product(barcode),
+
+FOREIGN KEY (recipeName) REFERENCES recipe(recipeName)
+
+);
+
+
+CREATE TABLE contains_code (
+
+  orderNum INT,
+
+  barcode INT,
+
+  PRIMARY KEY (orderNum, barcode),
+
+  FOREIGN KEY (barcode) REFERENCES product(barcode),
+
+  FOREIGN KEY (orderNum) REFERENCES orders(orderNum)
+
+);
+
+
+
+CREATE TABLE supplies(
+supID INT,
+storeID INT ,
+prodCode INT,
+ PRIMARY KEY (supID, storeID, prodCode),
+CONSTRAINT fk_supid FOREIGN KEY (supID) REFERENCES supplier(supplierID),
+CONSTRAINT fk_storID FOREIGN KEY (storeID) REFERENCES store(storeID),
+CONSTRAINT fk_prodCode FOREIGN KEY (prodCode) REFERENCES product(barcode));
+
+
+CREATE TABLE receives_order(
+addressID INT,
+email VARCHAR(30),
+PRIMARY KEY(addressID, email),
+CONSTRAINT fk_addID FOREIGN KEY (addressID) REFERENCES store(addressID),
+CONSTRAINT fk_email FOREIGN KEY (email) REFERENCES customer(email));
+
+
+CREATE TABLE pays_with(
+card_num CHAR(16),
+email VARCHAR (30),
+PRIMARY KEY(card_num, email),
+CONSTRAINT fk_cardnum FOREIGN KEY (card_num) REFERENCES payment_method(card_num),
+CONSTRAINT fk_email_customer FOREIGN KEY (email) REFERENCES customer(email));
+
+
+CREATE TABLE phone_number(
+phone_num VARCHAR(12) PRIMARY KEY,
+fname VARCHAR(30),
+lname VARCHAR(30),
+CONSTRAINT fk_phone FOREIGN KEY (phone_num) REFERENCES customer (phoneNum));
+
+
+CREATE TABLE meat(
+prodCode INT PRIMARY KEY,
+animal VARCHAR(30),
+CONSTRAINT fk_prodcodeMeat FOREIGN KEY (prodCode) REFERENCES product (barcode));
+
+
+CREATE TABLE produce(
+prodCode INT PRIMARY KEY,
+name VARCHAR(30),
+organic BOOLEAN,
+CONSTRAINT fk_producecode FOREIGN KEY (prodCode) REFERENCES product (barcode));
+
+CREATE TABLE supplier_contact(
+	contactType VARCHAR (30),
+	contactValue VARCHAR(50) NOT NULL UNIQUE,
+	iD INT,
+    PRIMARY KEY(contactType, iD),
+FOREIGN KEY (iD) REFERENCES product (barcode)
+);
+
+CREATE TABLE dairy (
+	prodCode INT PRIMARY KEY,
+	dairyType VARCHAR (30),
+	FOREIGN KEY (ProdCode) REFERENCES product (barcode)
+);
+
+CREATE TABLE medicinal (
+	prodCode INT PRIMARY KEY,
+	dosage INT,
+	FOREIGN KEY (prodCode) REFERENCES product (barcode)
+);
+
+CREATE TABLE confectionery (
+	prodCode INT PRIMARY KEY,
+	conType VARCHAR (30),
+	FOREIGN KEY (prodCode) REFERENCES product (barcode)
+
+);
+
+CREATE TABLE personal_hygiene (
+	prodCode INT PRIMARY KEY,
+	scent VARCHAR (30),
+	FOREIGN KEY (prodCode) REFERENCES product (barcode)
+
+);
+
+CREATE TABLE store_phone (
+	phone VARCHAR(50) PRIMARY KEY,
+	storeName VARCHAR(50) NOT NULL,
+	storeHours VARCHAR (50),
+	FOREIGN KEY (phone) REFERENCES store (phone)
+
+);
+
+INSERT INTO customer (email, phoneNum) VALUES
+('thibaud.roy@gmail.com', '1234567890'),
+('vincent.lee@gmail.com', '9876543210'),
+('jay.dance@gmail.com', '5555555555'),
+('amy.le@gmail.com', '9999999999');
+
+
+INSERT INTO payment_method (card_num, cvv, expDate, cardName, billAdd) VALUES
+('1234567890123456', 123, '12/25', 'Thibaud Roy', '123 Main St'),
+('9876543210987654', 456, '03/24', 'Vincent Lee', '456 Elm St');
+
+INSERT INTO address (addressLine1, addressLine2, suburb, postcode, city, addressID) VALUES
+('123 First St', 'Apt 1A', 'North Dunedin', 11111, 'Dunedin', 1),
+('456 Second St', 'Apt 2B', 'Dunedin Central', 22222, 'Dunedin', 2);
+
+
+INSERT INTO supplier (supName, supplierID) VALUES
+('Supplier A', 1),
+('Supplier B', 2);
+
+
+INSERT INTO store (storeID, addressID, phone) VALUES
+(1, 1, '111-111-1111'),
+(2, 2, '222-222-2222');
+
+
+
+INSERT INTO orders (orderNum, cardNum, storeID, addressID, email, orderDate) VALUES
+(1, '1234567890123456', 1, 1, 'thibaud.roy@gmail.com', '2023-05-01 10:00:00'),
+(2, '9876543210987654', 2, 2, 'vincent.lee@gmail.com', '2023-05-02 11:00:00');
+
+
+INSERT INTO product (barcode, amountInStock, name, useByDate, costPerUnit) VALUES
+(1001, 50, 'Product A', '2023-06-01', 10.99),
+(1002, 30, 'Product B', '2023-06-15', 5.99);
+
+
+INSERT INTO recipe (recipeName, instruction) VALUES
+('Recipe A', 'Instructions for Recipe A'),
+('Recipe B', 'Instructions for Recipe B');
+
+
+INSERT INTO ingredients (prodName, recipeName, productQuantity) VALUES
+('Product A', 'Recipe A', 2.5),
+('Product B', 'Recipe A', 1.5),
+('Product A', 'Recipe B', 3),
+('Product B', 'Recipe B', 2);
+
+
+INSERT INTO promotion (promotionCode, discountPercentage, promotionDescription, promotionStartDate, promotionLength, productBarcode) VALUES
+('PROMO1', 10.00, 'Promotion 1 Description', '2023-05-01', 30, 1001),
+('PROMO2', 15.00, 'Promotion 2 Description', '2023-05-15', 15, 1002);
+
+
+INSERT INTO requires (recipeName, productCode) VALUES
+('Recipe A', 1001),
+('Recipe A', 1002),
+('Recipe B', 1001),
+('Recipe B', 1002);
+
+
+INSERT INTO contains_code (orderNum, barcode) VALUES
+(1, 1001),
+(1, 1002),
+(2, 1002);
+
+
+INSERT INTO supplies (supID, storeID, prodCode) VALUES
+(1, 1, 1001),
+(2, 2, 1002);
+
+
+INSERT INTO receives_order (addressID, email) VALUES
+(1, 'jay.dance@gmail.com'),
+(2, 'amy.le@gmail.com');
+
+
+INSERT INTO pays_with (card_num, email) VALUES
+('1234567890123456', 'jay.dance@gmail.com'),
+('9876543210987654', 'amy.le@gmail.com');
+
+
+INSERT INTO phone_number (phone_num, fname, lname) VALUES
+('1234567890', 'Thibaud', 'Roy'),
+('9876543210', 'Vincent', 'Lee'),
+('5555555555', 'Jay', 'Dance'),
+('9999999999', 'Amy', 'Le');
+
+
+INSERT INTO meat (prodCode, animal) VALUES
+(1001, 'Chicken');
+
+
+INSERT INTO produce (prodCode, name, organic) VALUES
+(1002, 'Apple', true);
+
+
+INSERT INTO supplier_contact (contactType, contactValue, iD) VALUES
+('Phone', '111-111-1111', 1001),
+('Email', 'supplierA@example.com', 1002);
+
+
+INSERT INTO dairy (prodCode, dairyType) VALUES
+(1002, 'Milk');
+
+
+INSERT INTO medicinal (prodCode, dosage) VALUES
+(1001, 500);
+
+
+INSERT INTO confectionery (prodCode, conType) VALUES
+(1002, 'Chocolate');
+
+
+INSERT INTO personal_hygiene (prodCode, scent) VALUES
+(1001, 'Lavender');
+
+
+INSERT INTO store_phone (phone, storeName, storeHours) VALUES
+('111-111-1111', 'PakN\'Save', '9:00 AM - 5:00 PM'),
+('222-222-2222', 'Countdown', '10:00 AM - 6:00 PM');
+
 COMMIT;
+SELECT * FROM customer;
+SELECT * FROM payment_method;
+SELECT * FROM address;
+SELECT * FROM supplier;
+SELECT * FROM store;
+SELECT * FROM orders;
+SELECT * FROM product;
+SELECT * FROM recipe;
+SELECT * FROM ingredients;
+SELECT * FROM promotion;
+SELECT * FROM requires;
+SELECT * FROM contains_code;
+SELECT * FROM supplies;
+SELECT * FROM receives_order;
+SELECT * FROM pays_with;
+SELECT * FROM phone_number;
+SELECT * FROM meat;
+SELECT * FROM produce;
+SELECT * FROM supplier_contact;
+SELECT * FROM dairy;
+SELECT * FROM medicinal;
+SELECT * FROM confectionery;
+SELECT * FROM personal_hygiene;
+SELECT * FROM store_phone;
 
-/*Amy*/
-CREATE TABLE PaymentMethod(
-    billingAddress varchar(200) NOT NULL,
-    nameOnCard varchar(50) NOT NULL,
-    expirationDate varchar(5) NOT NULL,
-    cvv varchar(3) NOT NULL,
-    PRIMARY KEY cardNumber varchar(16)
-);
-
-INSERT INTO PaymentMethod VALUES('24 Heriot Row, City Rise', 'Harriet Doe', '04/27', '123', '1111222233334444');
-INSERT INTO PaymentMethod VALUES('11b ethel benjamin place, north dunedin', 'janet pollock', '12/24', '013', '1234987632104567');
-INSERT INTO PaymentMethod VALUES('21C CLARK ST CENTRAL DUNEDIN DUNEDIN OTAGO NEW ZEALAND', 'JW KIM', '10/23', '789', '4835610412345678');
-INSERT INTO PaymentMethod VALUES('21A grange street, Dunedin', 'Leigh-Ann Charlotte Lizbet Winston', '1/24', '222', '7612091800004321');
-INSERT INTO PaymentMethod VALUES('3/15b Ethel Benjamin Pl, North Dunedin, Dunedin, Otago, NZ', 'Jenna Smith', '08/25', '189', '5678432128102012');
-COMMIT;
-
-/*Amy*/
-CREATE TABLE Store(
-    phone varchar(12) NOT NULL,
-    addressID varchar(5) NOT NULL,
-    PRIMARY KEY storeID varchar(5),
-    CONSTRAINT fk_address
-        FOREIGN KEY (addressID)
-        REFERENCES Address(addressID)
-);
-
-INSERT INTO Store VALUES('034567890', '11122', '00001');
-INSERT INTO Store VALUES('0312312345', '10123', '00002');
-INSERT INTO Store VALUES('097618923', '14209', '00003');
-INSERT INTO Store VALUES('0612939876', '48569', '00004');
-INSERT INTO Store VALUES('0992340571', '84731', '00005');
-COMMIT;
-
-/*Amy*/
-CREATE TABLE Order(
-    orderDate DATE,
-    email varchar(100) NOT NULL,
-    addressID varchar(5) NOT NULL,
-    storeID varchar(5) NOT NULL,
-    cardNumber varchar(16) NOT NULL,
-    PRIMARY KEY orderNumber varchar(10),
-    CONSTRAINT fk_customer
-        FOREIGN KEY (email)
-        REFERENCES Customer(email)
-    CONSTRAINT fk_address
-        FOREIGN KEY (storeID)
-        REFERENCES Store(storeID)
-    CONSTRAINT fk_payment
-        FOREIGN KEY (cardNumber)
-        REFERENCES PaymentMethod(cardNumber)
-);
-
-INSERT INTO Order VALUES(TO_DATE('21/05/2023'), 'someemail@random.com', '42145', '15098', '3109562012378683', '16951865');
-INSERT INTO Order VALUES(TO_DATE('1/1/22'), 'justanaddress@gmail.com', '35871', '53611', '9361517961327235', '1726543');
-INSERT INTO Order(email, addressID, storeID, cardNumber, orderNumber) VALUES('quickbrownfox@lazydog.com', '23896', '34862', '1178560639792583', '18547');
-COMMIT;
-
-/*Amy*/
-CREATE TABLE Address(
-    address1 varchar(50) NOT NULL,
-    address2 varchar(50),
-    suburb varchar(20) NOT NULL,
-    postcode varchar(10) NOT NULL,
-    PRIMARY KEY addressID varchar(10)
-);
-
-INSERT INTO Address VALUES('First Floor', '450 George Street', 'North Dunedin', '9016', '12489');
-INSERT INTO Address(address1, suburb, postcode, addressID) VALUES('290 North Rd', 'NEV', '9024', '493672');
-INSERT INTO Address VALUES('Unit 3', '123 Nelson St', 'Musselburg', '9010', '9186521');
-COMMIT;
-
-/*Amy*/
-CREATE TABLE Supplier(
-    supplierName varchar(50) NOT NULL,
-    PRIMARY KEY supplierID varchar(10)
-);
-
-INSERT INTO Supplier VALUES('General Store Dunedin', '18470');
-INSERT INTO Supplier VALUES('Harbour Fish', '26348576');
-INSERT INTO Supplier VALUES('Trents', '1076');
-COMMIT;
-
-CREATE TABLE Product(
-
-);
-
-CREATE TABLE Recipe(
-
-);
-
-CREATE TABLE Promotion(
-
-);
-
-CREATE TABLE SupplierContact(
-
-);
-
-CREATE TABLE Ingredients(
-
-);
-
-CREATE TABLE PhoneNumber(
-
-);
-
-CREATE TABLE PaysWith(
-
-);
-
-CREATE TABLE ReceivesOrder(
-
-);
-
-CREATE TABLE Supplies(
-
-);
-
-CREATE TABLE Contains(
-
-);
-
-CREATE TABLE Requires(
-
-);
-
-CREATE TABLE AdPostcode(
-
-);
-
-CREATE TABLE StorePhone(
-
-);
-
-CREATE TABLE PersonalHygiene(
-
-);
-
-CREATE TABLE Confectionery(
-
-);
-
-CREATE TABLE Medicinal(
-
-);
-
-CREATE TABLE Dairy(
-
-);
-
-CREATE TABLE Produce(
-
-);
-
-CREATE TABLE Meat(
-
-);
